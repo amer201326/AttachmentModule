@@ -1,0 +1,44 @@
+﻿
+@using MyCompanyName.AbpZeroTemplate.Web.Areas.AppAreaName.Models.Common.Modals
+@using MyCompanyName.AbpZeroTemplate.Web.Areas.AppAreaName.Models.AttachmentFiles
+@model AttachmentFileViewModel
+
+@await Html.PartialAsync("~/Areas/AppAreaName/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("Details")))
+
+<div class="modal-body">
+    <div id="AttachmentFileInformationsTab">
+        
+        <div class="row">
+            <div class="col-6 mb-3">
+                <h6>@L("PhysicalName") :</h6>
+                @Model.AttachmentFile.PhysicalName
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("OriginalName") :</h6>
+                @Model.AttachmentFile.OriginalName
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Size") :</h6>
+                @Model.AttachmentFile.Size
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("ObjectId") :</h6>
+                @Model.AttachmentFile.ObjectId
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Path") :</h6>
+                @Model.AttachmentFile.Path
+            </div>
+
+            <div class="col-6 mb-3">
+                <h6>(@L("AttachmentType")) @L("ArName") :</h6>
+                @Model.AttachmentTypeArName
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/AppAreaName/Views/Common/Modals/_ModalFooterWithClose.cshtml")
+

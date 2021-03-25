@@ -1,0 +1,44 @@
+﻿
+@using MyCompanyName.AbpZeroTemplate.Web.Areas.AppAreaName.Models.Common.Modals
+@using MyCompanyName.AbpZeroTemplate.Web.Areas.AppAreaName.Models.AttachmentTypes
+@model AttachmentTypeViewModel
+
+@await Html.PartialAsync("~/Areas/AppAreaName/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("Details")))
+
+<div class="modal-body">
+    <div id="AttachmentTypeInformationsTab">
+        
+        <div class="row">
+            <div class="col-6 mb-3">
+                <h6>@L("ArName") :</h6>
+                @Model.AttachmentType.ArName
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("EnName") :</h6>
+                @Model.AttachmentType.EnName
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("MaxSize") :</h6>
+                @Model.AttachmentType.MaxSize
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("AllowedExtensions") :</h6>
+                @Model.AttachmentType.AllowedExtensions
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("MaxAttachments") :</h6>
+                @Model.AttachmentType.MaxAttachments
+            </div>
+
+            <div class="col-6 mb-3">
+                <h6>(@L("AttachmentEntityType")) @L("ArName") :</h6>
+                @Model.AttachmentEntityTypeArName
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/AppAreaName/Views/Common/Modals/_ModalFooterWithClose.cshtml")
+

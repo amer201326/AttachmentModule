@@ -1,0 +1,56 @@
+﻿
+@using System.Globalization
+@using MyCompanyName.AbpZeroTemplate.Web.Areas.AppAreaName.Models.Common.Modals
+@using MyCompanyName.AbpZeroTemplate.Web.Areas.AppAreaName.Models.AttachmentTypes
+@model CreateOrEditAttachmentTypeModalViewModel
+
+@await Html.PartialAsync("~/Areas/AppAreaName/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditAttachmentType")) : L("CreateNewAttachmentType")))
+
+<div class="modal-body">
+        <div id="AttachmentTypeInformationsTab">
+            <form name="AttachmentTypeInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.AttachmentType.Id" />
+                }
+
+				            
+						<div class="form-group">
+							<label for="entityTypeId">@L("AttachmentEntityType")</label>
+							@Html.DropDownList("entityTypeId", new SelectList(Model.AttachmentTypeAttachmentEntityTypeList,"Id","DisplayName", (Model.IsEditMode ? Model.AttachmentType.EntityTypeId.ToString() : "")),@L("SelectAAttachmentEntityType"), new { @class = "form-control"  , @required="required" })
+						</div>
+
+
+				
+								<div class="form-group">
+									<label for="AttachmentType_ArName">@L("ArName")</label>
+									<input class="form-control" id="AttachmentType_ArName" value="@Model.AttachmentType.ArName" type="text" name="arName"  required    />
+								</div>
+					
+								<div class="form-group">
+									<label for="AttachmentType_EnName">@L("EnName")</label>
+									<input class="form-control" id="AttachmentType_EnName" value="@Model.AttachmentType.EnName" type="text" name="enName"  required    />
+								</div>
+					
+								<div class="form-group">
+									<label for="AttachmentType_MaxSize">@L("MaxSize")</label>
+									<input class="form-control m-input" id="AttachmentType_MaxSize" value="@Model.AttachmentType.MaxSize.ToString(CultureInfo.InvariantCulture)" type="number" name="maxSize"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="AttachmentType_AllowedExtensions">@L("AllowedExtensions")</label>
+									<input class="form-control" id="AttachmentType_AllowedExtensions" value="@Model.AttachmentType.AllowedExtensions" type="text" name="allowedExtensions"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="AttachmentType_MaxAttachments">@L("MaxAttachments")</label>
+									<input class="form-control m-input" id="AttachmentType_MaxAttachments" value="@Model.AttachmentType.MaxAttachments.ToString(CultureInfo.InvariantCulture)" type="number" name="maxAttachments"  />
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/AppAreaName/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

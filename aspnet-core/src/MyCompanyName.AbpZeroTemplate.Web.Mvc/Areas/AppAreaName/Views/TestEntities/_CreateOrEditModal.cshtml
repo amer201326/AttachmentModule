@@ -1,0 +1,31 @@
+﻿
+@using System.Globalization
+@using MyCompanyName.AbpZeroTemplate.Web.Areas.AppAreaName.Models.Common.Modals
+@using MyCompanyName.AbpZeroTemplate.Web.Areas.AppAreaName.Models.TestEntities
+@model CreateOrEditTestEntityModalViewModel
+
+@await Html.PartialAsync("~/Areas/AppAreaName/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditTestEntity")) : L("CreateNewTestEntity")))
+
+<div class="modal-body">
+        <div id="TestEntityInformationsTab">
+            <form name="TestEntityInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.TestEntity.Id" />
+                }
+
+				
+
+				
+								<div class="form-group">
+									<label for="TestEntity_ArName">@L("ArName")</label>
+									<input class="form-control" id="TestEntity_ArName" value="@Model.TestEntity.ArName" type="text" name="arName"  required    />
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/AppAreaName/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

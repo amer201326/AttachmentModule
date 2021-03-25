@@ -1,0 +1,116 @@
+﻿@using MyCompanyName.AbpZeroTemplate.Authorization
+@using MyCompanyName.AbpZeroTemplate.Web.Areas.AppAreaName.Models.AttachmentTypes
+@using MyCompanyName.AbpZeroTemplate.Web.Areas.AppAreaName.Startup
+@model AttachmentTypesViewModel
+@{
+    ViewBag.CurrentPageName = AppAreaNamePageNames.Common.AttachmentTypes;
+}
+@section Scripts
+{
+    <script abp-src="/view-resources/Areas/AppAreaName/Views/AttachmentTypes/Index.js" asp-append-version="true"></script>
+}
+
+<div class="content d-flex flex-column flex-column-fluid">
+
+                <abp-page-subheader title="@L("AttachmentTypes")" description="@L("AttachmentTypesHeaderInfo")">
+                     <button id="ExportToExcelButton" class="btn btn-outline-success"><i class="fa fa-file-excel"></i> @L("ExportToExcel")</button>
+            
+                     @if (IsGranted(AppPermissions.Pages_AttachmentTypes_Create))
+                     {
+                         <button id="CreateNewAttachmentTypeButton" class="btn btn-primary blue"><i class="fa fa-plus"></i> @L("CreateNewAttachmentType")</button>                
+                     }
+                </abp-page-subheader>
+            
+<div class="@(await GetContainerClass())">   
+    <div class="card card-custom gutter-b">
+        <div class="card-body">
+            <div class="form">
+                <div class="row align-items-center mb-4">
+                    <div class="col-xl-12">
+                        <div class="form-group align-items-center">
+                            <div class="input-group">
+                                <input type="text" id="AttachmentTypesTableFilter" class="form-control m-input" placeholder="@L("SearchWithThreeDot")" value="@Model.FilterText">
+                                <span class="input-group-btn">
+                                    <button id="GetAttachmentTypesButton" class="btn btn-primary" type="submit"><i class="flaticon-search-1"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+			</div>
+                <div id="AdvacedAuditFiltersArea" style="display: none" class="row mb-4">
+                    <div class="col-md-12">
+						<div class="kt-separator kt-separator--border-dashed"></div>
+					</div>
+
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="ArNameFilterId">@L("ArName")</label>
+									<input type="text" class="form-control" name="arNameFilter" id="ArNameFilterId">
+								</div>
+                            </div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="EnNameFilterId">@L("EnName")</label>
+									<input type="text" class="form-control" name="enNameFilter" id="EnNameFilterId">
+								</div>
+                            </div>
+                            <div class="col-md-3">
+                                 <div class="form-group">
+									<label  for="MinMaxSizeFilterId">@L("MinMax") @L("MaxSize")</label>
+									<div class="input-group">
+										<input type="number" class="form-control m-input" placeholder="@L("MinValue")" name="minMaxSizeFilter" id="MinMaxSizeFilterId"/>
+                                        <input type="number" class="form-control m-input" placeholder="@L("MaxValue")" name="maxMaxSizeFilter"  id="MaxMaxSizeFilterId"/>
+									</div>
+                                </div>
+                            </div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="AllowedExtensionsFilterId">@L("AllowedExtensions")</label>
+									<input type="text" class="form-control" name="allowedExtensionsFilter" id="AllowedExtensionsFilterId">
+								</div>
+                            </div>
+                            <div class="col-md-3">
+                                 <div class="form-group">
+									<label  for="MinMaxAttachmentsFilterId">@L("MinMax") @L("MaxAttachments")</label>
+									<div class="input-group">
+										<input type="number" class="form-control m-input" placeholder="@L("MinValue")" name="minMaxAttachmentsFilter" id="MinMaxAttachmentsFilterId"/>
+                                        <input type="number" class="form-control m-input" placeholder="@L("MaxValue")" name="maxMaxAttachmentsFilter"  id="MaxMaxAttachmentsFilterId"/>
+									</div>
+                                </div>
+                            </div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="AttachmentEntityTypeArNameFilterId">(@L("AttachmentEntityType")) @L("ArName")</label>
+									<input type="text" class="form-control" name="attachmentEntityTypeArNameFilter" id="AttachmentEntityTypeArNameFilterId">
+								</div>
+                            </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-xl-12">
+                        <span id="ShowAdvancedFiltersSpan" class="text-muted clickable-item"><i class="fa fa-angle-down"></i> @L("ShowAdvancedFilters")</span>
+                        <span id="HideAdvancedFiltersSpan" class="text-muted clickable-item" style="display: none"><i class="fa fa-angle-up"></i> @L("HideAdvancedFilters")</span>
+                    </div>
+                </div>
+            <div class="row align-items-center">
+                <table id="AttachmentTypesTable" class="display table table-striped table-bordered table-hover dt-responsive nowrap">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            
+                            <th>@L("Actions")</th>
+								<th>@L("ArName")</th>
+								<th>@L("EnName")</th>
+								<th>@L("MaxSize")</th>
+								<th>@L("AllowedExtensions")</th>
+								<th>@L("MaxAttachments")</th>
+								<th>@L("AttachmentEntityTypeArName")</th>
+                            
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>

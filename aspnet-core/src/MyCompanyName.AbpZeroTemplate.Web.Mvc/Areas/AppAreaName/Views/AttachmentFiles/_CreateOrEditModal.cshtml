@@ -1,0 +1,56 @@
+﻿
+@using System.Globalization
+@using MyCompanyName.AbpZeroTemplate.Web.Areas.AppAreaName.Models.Common.Modals
+@using MyCompanyName.AbpZeroTemplate.Web.Areas.AppAreaName.Models.AttachmentFiles
+@model CreateOrEditAttachmentFileModalViewModel
+
+@await Html.PartialAsync("~/Areas/AppAreaName/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditAttachmentFile")) : L("CreateNewAttachmentFile")))
+
+<div class="modal-body">
+        <div id="AttachmentFileInformationsTab">
+            <form name="AttachmentFileInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.AttachmentFile.Id" />
+                }
+
+				            
+						<div class="form-group">
+							<label for="attachmentTypeId">@L("AttachmentType")</label>
+							@Html.DropDownList("attachmentTypeId", new SelectList(Model.AttachmentFileAttachmentTypeList,"Id","DisplayName", (Model.IsEditMode ? Model.AttachmentFile.AttachmentTypeId.ToString() : "")),@L("SelectAAttachmentType"), new { @class = "form-control"  , @required="required" })
+						</div>
+
+
+				
+								<div class="form-group">
+									<label for="AttachmentFile_PhysicalName">@L("PhysicalName")</label>
+									<input class="form-control" id="AttachmentFile_PhysicalName" value="@Model.AttachmentFile.PhysicalName" type="text" name="physicalName"  required    />
+								</div>
+					
+								<div class="form-group">
+									<label for="AttachmentFile_OriginalName">@L("OriginalName")</label>
+									<input class="form-control" id="AttachmentFile_OriginalName" value="@Model.AttachmentFile.OriginalName" type="text" name="originalName"  required    />
+								</div>
+					
+								<div class="form-group">
+									<label for="AttachmentFile_Size">@L("Size")</label>
+									<input class="form-control m-input" id="AttachmentFile_Size" value="@Model.AttachmentFile.Size.ToString(CultureInfo.InvariantCulture)" type="number" name="size"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="AttachmentFile_ObjectId">@L("ObjectId")</label>
+									<input class="form-control" id="AttachmentFile_ObjectId" value="@Model.AttachmentFile.ObjectId" type="text" name="objectId"  required    />
+								</div>
+					
+								<div class="form-group">
+									<label for="AttachmentFile_Path">@L("Path")</label>
+									<input class="form-control" id="AttachmentFile_Path" value="@Model.AttachmentFile.Path" type="text" name="path"  required    />
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/AppAreaName/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

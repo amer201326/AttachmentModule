@@ -1,0 +1,113 @@
+﻿@using MyCompanyName.AbpZeroTemplate.Authorization
+@using MyCompanyName.AbpZeroTemplate.Web.Areas.AppAreaName.Models.AttachmentFiles
+@using MyCompanyName.AbpZeroTemplate.Web.Areas.AppAreaName.Startup
+@model AttachmentFilesViewModel
+@{
+    ViewBag.CurrentPageName = AppAreaNamePageNames.Common.AttachmentFiles;
+}
+@section Scripts
+{
+    <script abp-src="/view-resources/Areas/AppAreaName/Views/AttachmentFiles/Index.js" asp-append-version="true"></script>
+}
+
+<div class="content d-flex flex-column flex-column-fluid">
+
+                <abp-page-subheader title="@L("AttachmentFiles")" description="@L("AttachmentFilesHeaderInfo")">
+                     <button id="ExportToExcelButton" class="btn btn-outline-success"><i class="fa fa-file-excel"></i> @L("ExportToExcel")</button>
+            
+                     @if (IsGranted(AppPermissions.Pages_AttachmentFiles_Create))
+                     {
+                         <button id="CreateNewAttachmentFileButton" class="btn btn-primary blue"><i class="fa fa-plus"></i> @L("CreateNewAttachmentFile")</button>                
+                     }
+                </abp-page-subheader>
+            
+<div class="@(await GetContainerClass())">   
+    <div class="card card-custom gutter-b">
+        <div class="card-body">
+            <div class="form">
+                <div class="row align-items-center mb-4">
+                    <div class="col-xl-12">
+                        <div class="form-group align-items-center">
+                            <div class="input-group">
+                                <input type="text" id="AttachmentFilesTableFilter" class="form-control m-input" placeholder="@L("SearchWithThreeDot")" value="@Model.FilterText">
+                                <span class="input-group-btn">
+                                    <button id="GetAttachmentFilesButton" class="btn btn-primary" type="submit"><i class="flaticon-search-1"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+			</div>
+                <div id="AdvacedAuditFiltersArea" style="display: none" class="row mb-4">
+                    <div class="col-md-12">
+						<div class="kt-separator kt-separator--border-dashed"></div>
+					</div>
+
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="PhysicalNameFilterId">@L("PhysicalName")</label>
+									<input type="text" class="form-control" name="physicalNameFilter" id="PhysicalNameFilterId">
+								</div>
+                            </div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="OriginalNameFilterId">@L("OriginalName")</label>
+									<input type="text" class="form-control" name="originalNameFilter" id="OriginalNameFilterId">
+								</div>
+                            </div>
+                            <div class="col-md-3">
+                                 <div class="form-group">
+									<label  for="MinSizeFilterId">@L("MinMax") @L("Size")</label>
+									<div class="input-group">
+										<input type="number" class="form-control m-input" placeholder="@L("MinValue")" name="minSizeFilter" id="MinSizeFilterId"/>
+                                        <input type="number" class="form-control m-input" placeholder="@L("MaxValue")" name="maxSizeFilter"  id="MaxSizeFilterId"/>
+									</div>
+                                </div>
+                            </div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="ObjectIdFilterId">@L("ObjectId")</label>
+									<input type="text" class="form-control" name="objectIdFilter" id="ObjectIdFilterId">
+								</div>
+                            </div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="PathFilterId">@L("Path")</label>
+									<input type="text" class="form-control" name="pathFilter" id="PathFilterId">
+								</div>
+                            </div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="AttachmentTypeArNameFilterId">(@L("AttachmentType")) @L("ArName")</label>
+									<input type="text" class="form-control" name="attachmentTypeArNameFilter" id="AttachmentTypeArNameFilterId">
+								</div>
+                            </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-xl-12">
+                        <span id="ShowAdvancedFiltersSpan" class="text-muted clickable-item"><i class="fa fa-angle-down"></i> @L("ShowAdvancedFilters")</span>
+                        <span id="HideAdvancedFiltersSpan" class="text-muted clickable-item" style="display: none"><i class="fa fa-angle-up"></i> @L("HideAdvancedFilters")</span>
+                    </div>
+                </div>
+            <div class="row align-items-center">
+                <table id="AttachmentFilesTable" class="display table table-striped table-bordered table-hover dt-responsive nowrap">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            
+                            <th>@L("Actions")</th>
+								<th>@L("PhysicalName")</th>
+								<th>@L("OriginalName")</th>
+								<th>@L("Size")</th>
+								<th>@L("ObjectId")</th>
+								<th>@L("Path")</th>
+								<th>@L("AttachmentTypeArName")</th>
+                            
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
