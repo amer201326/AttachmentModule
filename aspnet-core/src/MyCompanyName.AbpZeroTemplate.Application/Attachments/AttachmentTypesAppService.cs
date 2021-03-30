@@ -17,6 +17,7 @@ using MyCompanyName.AbpZeroTemplate.Authorization;
 using Abp.Extensions;
 using Abp.Authorization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MyCompanyName.AbpZeroTemplate.Attachments
 {
@@ -94,8 +95,16 @@ namespace MyCompanyName.AbpZeroTemplate.Attachments
 			
             return output;
          }
-		 
-		 [AbpAuthorize(AppPermissions.Pages_AttachmentTypes_Edit)]
+		[NonAction]
+		public async Task<AttachmentTypeDto> GetAttachmentTypeById(int id)
+		{
+			var attachmentType = await _attachmentTypeRepository.GetAsync(id);
+
+			return ObjectMapper.Map<AttachmentTypeDto>(attachmentType);
+
+		}
+
+		[AbpAuthorize(AppPermissions.Pages_AttachmentTypes_Edit)]
 		 public async Task<GetAttachmentTypeForEditOutput> GetAttachmentTypeForEdit(EntityDto input)
          {
             var attachmentType = await _attachmentTypeRepository.FirstOrDefaultAsync(input.Id);

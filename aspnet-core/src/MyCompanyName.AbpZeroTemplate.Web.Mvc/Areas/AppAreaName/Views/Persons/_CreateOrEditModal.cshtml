@@ -1,0 +1,51 @@
+﻿
+@using System.Globalization
+@using MyCompanyName.AbpZeroTemplate.Web.Areas.AppAreaName.Models.Common.Modals
+@using MyCompanyName.AbpZeroTemplate.Web.Areas.AppAreaName.Models.Persons
+@model CreateOrEditPersonModalViewModel
+
+@await Html.PartialAsync("~/Areas/AppAreaName/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditPerson")) : L("CreateNewPerson")))
+
+<div class="modal-body">
+    <div id="PersonInformationsTab">
+        <form name="PersonInformationsForm" role="form" novalidate class="form-validation">
+
+            @if (Model.IsEditMode)
+            {
+                <input type="hidden" name="id" value="@Model.Person.Id" />
+            }
+
+
+
+
+            <div class="form-group">
+                <label for="Person_name">@L("name")</label>
+                <input class="form-control" id="Person_name" value="@Model.Person.name" type="text" name="name" />
+            </div>
+            <div id="personImagesView" class="container">
+                @foreach (var item in Model.Person.Attachments)
+                {
+                    <div class="row margin-bottom-10">
+                        <div class="col-sm ">
+                            <a href="Persons/DownloadAttacment?FileToken=@item.FileToken" target="_blank">@item.FileName</a>
+                        </div>
+
+                        <div class="col-sm ">
+                            <a fileToken="@item.FileToken" href="#" class="deleteAtt btn btn-icon btn-danger btn-sm mr-2" >
+                                <i class="far fa-trash-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+            
+            <div class="form-group">
+                <input type="file" id="image" />
+                <span class="help-block m-b-none"></span>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/AppAreaName/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

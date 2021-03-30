@@ -4,6 +4,9 @@
     {
         public static class Common
         {
+            public const string Kkkks = "Persons.Kkkks";
+            public const string Diseases = "Persons.Diseases";
+            public const string Persons = "Persons.Persons";
             public const string AttachmentFiles = "Attachments.AttachmentFiles";
             public const string AttachmentTypes = "Attachments.AttachmentTypes";
             public const string AttachmentEntityTypes = "Attachments.AttachmentEntityTypes";

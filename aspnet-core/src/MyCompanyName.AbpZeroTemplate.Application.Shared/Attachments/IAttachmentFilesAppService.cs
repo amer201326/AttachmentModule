@@ -5,7 +5,8 @@ using Abp.Application.Services.Dto;
 using MyCompanyName.AbpZeroTemplate.Attachments.Dtos;
 using MyCompanyName.AbpZeroTemplate.Dto;
 using System.Collections.Generic;
-
+using MyCompanyName.AbpZeroTemplate.Persons.Dtos;
+using MyCompanyName.AbpZeroTemplate.Test.Dtos;
 
 namespace MyCompanyName.AbpZeroTemplate.Attachments
 {
@@ -25,6 +26,8 @@ namespace MyCompanyName.AbpZeroTemplate.Attachments
 
 		
 		Task<List<AttachmentFileAttachmentTypeLookupTableDto>> GetAllAttachmentTypeForTableDropdown();
-		
+        Task CheckAttachment<T>(int AttachmentTypeId, string ObjectID, AttachmentsViewModelWithEntityDto<T> input, AttachmentUploadType type);
+        Task<List<UploadFilesInput>> GetAttacments(string ObjectID, int AttachmentEntityTypeId);
+        Task<AttachmentMemoryStream> DownloadAttaachment(string FileToken);
     }
 }

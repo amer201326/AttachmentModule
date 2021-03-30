@@ -1,4 +1,6 @@
-﻿using MyCompanyName.AbpZeroTemplate.Attachments.Dtos;
+﻿using MyCompanyName.AbpZeroTemplate.Persons.Dtos;
+using MyCompanyName.AbpZeroTemplate.Persons;
+using MyCompanyName.AbpZeroTemplate.Attachments.Dtos;
 using MyCompanyName.AbpZeroTemplate.Attachments;
 using MyCompanyName.AbpZeroTemplate.Test.Dtos;
 using MyCompanyName.AbpZeroTemplate.Test;
@@ -51,10 +53,17 @@ namespace MyCompanyName.AbpZeroTemplate
     {
         public static void CreateMappings(IMapperConfigurationExpression configuration)
         {
+            configuration.CreateMap<CreateOrEditKkkkDto, Kkkk>().ReverseMap();
+            configuration.CreateMap<KkkkDto, Kkkk>().ReverseMap();
+            configuration.CreateMap<CreateOrEditDiseaseDto, Disease>().ReverseMap();
+            configuration.CreateMap<DiseaseDto, Disease>().ReverseMap();
+            configuration.CreateMap<CreateOrEditPersonDto, Person>().ReverseMap();
+            configuration.CreateMap<PersonDto, Person>().ReverseMap();
             configuration.CreateMap<CreateOrEditAttachmentFileDto, AttachmentFile>().ReverseMap();
             configuration.CreateMap<AttachmentFileDto, AttachmentFile>().ReverseMap();
             configuration.CreateMap<CreateOrEditAttachmentTypeDto, AttachmentType>().ReverseMap();
             configuration.CreateMap<AttachmentTypeDto, AttachmentType>().ReverseMap();
+            configuration.CreateMap<UploadFilesInputDto, UploadFilesInput>().ReverseMap();
             configuration.CreateMap<CreateOrEditAttachmentEntityTypeDto, AttachmentEntityType>().ReverseMap();
             configuration.CreateMap<AttachmentEntityTypeDto, AttachmentEntityType>().ReverseMap();
             configuration.CreateMap<CreateOrEditTestEntityDto, TestEntity>().ReverseMap();

@@ -9,6 +9,10 @@ using MyCompanyName.AbpZeroTemplate.Attachments;
 using MyCompanyName.AbpZeroTemplate.Attachments.Dtos;
 using Abp.Application.Services.Dto;
 using Abp.Extensions;
+using Abp.UI;
+using Abp.IO.Extensions;
+using MyCompanyName.AbpZeroTemplate.Storage;
+using Abp.Web.Models;
 
 namespace MyCompanyName.AbpZeroTemplate.Web.Areas.AppAreaName.Controllers
 {
@@ -17,10 +21,15 @@ namespace MyCompanyName.AbpZeroTemplate.Web.Areas.AppAreaName.Controllers
     public class AttachmentFilesController : AbpZeroTemplateControllerBase
     {
         private readonly IAttachmentFilesAppService _attachmentFilesAppService;
+        private readonly ITempFileCacheManager _tempFileCacheManager;
 
-        public AttachmentFilesController(IAttachmentFilesAppService attachmentFilesAppService)
+
+        public AttachmentFilesController(IAttachmentFilesAppService attachmentFilesAppService,
+            ITempFileCacheManager tempFileCacheManager)
         {
             _attachmentFilesAppService = attachmentFilesAppService;
+            _tempFileCacheManager = tempFileCacheManager;
+
         }
 
         public ActionResult Index()
@@ -74,5 +83,47 @@ namespace MyCompanyName.AbpZeroTemplate.Web.Areas.AppAreaName.Controllers
         }
 
 
+        public UploadFilesOutput UploadFiles()
+        {
+
+            var Files = Request.Form.Files;
+
+            //Check input
+            if (Files == null || Files.Count == 0)
+            {
+                throw new UserFriendlyException(L("Upload_Files_Error"));
+            }
+
+            var file = Files[0];
+            UploadFilesOutput result;
+
+            try
+            {
+                byte[] fileBytes;
+                using (var stream = file.OpenReadStream())
+                {
+                    fileBytes = stream.GetAllBytes();
+                }
+
+
+                var token = Guid.NewGuid().ToString();
+                _tempFileCacheManager.SetFile(token, fileBytes);
+
+
+                result = new UploadFilesOutput
+                {
+                    FileToken = token,
+                    FileName = file.FileName
+                };
+
+            }
+            catch (UserFriendlyException ex)
+            {
+                result = new UploadFilesOutput(new ErrorInfo(ex.Message));
+            }
+
+            return result;
+
+        }
     }
 }

@@ -16,6 +16,8 @@ namespace MyCompanyName.AbpZeroTemplate.Attachments
         Task<GetAttachmentTypeForViewDto> GetAttachmentTypeForView(int id);
 
 		Task<GetAttachmentTypeForEditOutput> GetAttachmentTypeForEdit(EntityDto input);
+		Task<AttachmentTypeDto> GetAttachmentTypeById(int id);
+
 
 		Task CreateOrEdit(CreateOrEditAttachmentTypeDto input);
 

@@ -24,6 +24,7 @@ namespace MyCompanyName.AbpZeroTemplate.Attachments
 		public virtual string AllowedExtensions { get; set; }
 		
 		public virtual int MaxAttachments { get; set; }
+		public virtual bool IsRequired { get; set; }
 		
 
 		public virtual int EntityTypeId { get; set; }

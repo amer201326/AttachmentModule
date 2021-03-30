@@ -28,7 +28,9 @@ namespace MyCompanyName.AbpZeroTemplate.Attachments
 		public virtual string Path { get; set; }
 		
 		public virtual int Version { get; set; }
-		
+		public string FileToken { get; set; }
+
+
 
 		public virtual int AttachmentTypeId { get; set; }
 		

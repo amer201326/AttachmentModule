@@ -1434,6 +1434,37 @@ namespace MyCompanyName.AbpZeroTemplate.Migrations
                     b.HasIndex("TenantId");
 
                     b.ToTable("AttachmentEntityTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ArName = "شخص",
+                            CreationTime = new DateTime(2021, 3, 29, 16, 7, 41, 670, DateTimeKind.Local).AddTicks(4804),
+                            EnName = "Person",
+                            Folder = "/Attachments/persons",
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ArName = "مرض",
+                            CreationTime = new DateTime(2021, 3, 29, 16, 7, 41, 670, DateTimeKind.Local).AddTicks(6769),
+                            EnName = "Desease",
+                            Folder = "/Desease",
+                            IsDeleted = false,
+                            ParentTypeId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ArName = "kkk",
+                            CreationTime = new DateTime(2021, 3, 29, 16, 7, 41, 670, DateTimeKind.Local).AddTicks(7459),
+                            EnName = "kk",
+                            Folder = "/kkk",
+                            IsDeleted = false,
+                            ParentTypeId = 1
+                        });
                 });
 
             modelBuilder.Entity("MyCompanyName.AbpZeroTemplate.Attachments.AttachmentFile", b =>
@@ -1457,6 +1488,9 @@ namespace MyCompanyName.AbpZeroTemplate.Migrations
 
                     b.Property<DateTime?>("DeletionTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("FileToken")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -1537,6 +1571,9 @@ namespace MyCompanyName.AbpZeroTemplate.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsRequired")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime?>("LastModificationTime")
                         .HasColumnType("datetime2");
 
@@ -1559,6 +1596,47 @@ namespace MyCompanyName.AbpZeroTemplate.Migrations
                     b.HasIndex("TenantId");
 
                     b.ToTable("AttachmentTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AllowedExtensions = "",
+                            ArName = "صورة الهوية",
+                            CreationTime = new DateTime(2021, 3, 29, 16, 7, 41, 663, DateTimeKind.Local).AddTicks(7537),
+                            EnName = "ID Card Image",
+                            EntityTypeId = 1,
+                            IsDeleted = false,
+                            IsRequired = false,
+                            MaxAttachments = 0,
+                            MaxSize = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AllowedExtensions = "",
+                            ArName = "تشخيص المرض",
+                            CreationTime = new DateTime(2021, 3, 29, 16, 7, 41, 667, DateTimeKind.Local).AddTicks(9092),
+                            EnName = "Diagnose the disease",
+                            EntityTypeId = 2,
+                            IsDeleted = false,
+                            IsRequired = false,
+                            MaxAttachments = 0,
+                            MaxSize = 0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AllowedExtensions = "",
+                            ArName = "kkk",
+                            CreationTime = new DateTime(2021, 3, 29, 16, 7, 41, 667, DateTimeKind.Local).AddTicks(9179),
+                            EnName = "lkkk",
+                            EntityTypeId = 3,
+                            IsDeleted = false,
+                            IsRequired = false,
+                            MaxAttachments = 0,
+                            MaxSize = 0
+                        });
                 });
 
             modelBuilder.Entity("MyCompanyName.AbpZeroTemplate.Authorization.Delegation.UserDelegation", b =>
@@ -2148,6 +2226,97 @@ namespace MyCompanyName.AbpZeroTemplate.Migrations
                     b.ToTable("AbpTenants");
                 });
 
+            modelBuilder.Entity("MyCompanyName.AbpZeroTemplate.Persons.Disease", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int>("PersonId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TenantId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PersonId");
+
+                    b.HasIndex("TenantId");
+
+                    b.ToTable("Diseases");
+                });
+
+            modelBuilder.Entity("MyCompanyName.AbpZeroTemplate.Persons.Kkkk", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int?>("PersonId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TenantId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PersonId");
+
+                    b.HasIndex("TenantId");
+
+                    b.ToTable("kkkks");
+                });
+
+            modelBuilder.Entity("MyCompanyName.AbpZeroTemplate.Persons.Person", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CreatorUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("DeleterUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("LastModifierUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int?>("TenantId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TenantId");
+
+                    b.ToTable("persons");
+                });
+
             modelBuilder.Entity("MyCompanyName.AbpZeroTemplate.Storage.BinaryObject", b =>
                 {
                     b.Property<Guid>("Id")
@@ -2537,6 +2706,26 @@ namespace MyCompanyName.AbpZeroTemplate.Migrations
                     b.Navigation("Edition");
 
                     b.Navigation("LastModifierUser");
+                });
+
+            modelBuilder.Entity("MyCompanyName.AbpZeroTemplate.Persons.Disease", b =>
+                {
+                    b.HasOne("MyCompanyName.AbpZeroTemplate.Persons.Person", "PersonFk")
+                        .WithMany()
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PersonFk");
+                });
+
+            modelBuilder.Entity("MyCompanyName.AbpZeroTemplate.Persons.Kkkk", b =>
+                {
+                    b.HasOne("MyCompanyName.AbpZeroTemplate.Persons.Person", "PersonFk")
+                        .WithMany()
+                        .HasForeignKey("PersonId");
+
+                    b.Navigation("PersonFk");
                 });
 
             modelBuilder.Entity("Abp.Application.Features.EditionFeatureSetting", b =>

@@ -1,6 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <localizationDictionary culture="en">
   <texts>
+    <text name="Kkkk">Kkkk</text>
+    <text name="MyCompanyName.AbpZeroTemplate.Persons.Kkkk">Kkkk</text>
+    <text name="KkkksHeaderInfo">Kkkks header info</text>
+    <text name="CreateNewKkkk">Create new kkkk</text>
+    <text name="EditKkkk">Edit kkkk</text>
+    <text name="DeleteKkkk">Delete kkkk</text>
+    <text name="Kkkks">Kkkks</text>
+    <text name="Personname">Personname</text>
+    <text name="PickPerson">Pick person</text>
+    <text name="Disease">Disease</text>
+    <text name="MyCompanyName.AbpZeroTemplate.Persons.Disease">Disease</text>
+    <text name="DiseasesHeaderInfo">Diseases header info</text>
+    <text name="CreateNewDisease">Create new disease</text>
+    <text name="EditDisease">Edit disease</text>
+    <text name="DeleteDisease">Delete disease</text>
+    <text name="Diseases">Diseases</text>
+    <text name="Persons">Persons</text>
+    <text name="Person">Person</text>
+    <text name="MyCompanyName.AbpZeroTemplate.Persons.Person">Person</text>
+    <text name="name">name</text>
+    <text name="PersonsHeaderInfo">Persons header info</text>
+    <text name="CreateNewPerson">Create new person</text>
+    <text name="EditPerson">Edit person</text>
+    <text name="DeletePerson">Delete person</text>
     <text name="Version">Version</text>
     <text name="AttachmentFile">Attachment file</text>
     <text name="MyCompanyName.AbpZeroTemplate.Attachments.AttachmentFile">AttachmentFile</text>

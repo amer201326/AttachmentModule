@@ -1,4 +1,5 @@
-﻿using MyCompanyName.AbpZeroTemplate.Attachments;
+﻿using MyCompanyName.AbpZeroTemplate.Persons;
+using MyCompanyName.AbpZeroTemplate.Attachments;
 using MyCompanyName.AbpZeroTemplate.Test;
 using Abp.IdentityServer4vNext;
 using Abp.Zero.EntityFrameworkCore;
@@ -13,11 +14,18 @@ using MyCompanyName.AbpZeroTemplate.MultiTenancy;
 using MyCompanyName.AbpZeroTemplate.MultiTenancy.Accounting;
 using MyCompanyName.AbpZeroTemplate.MultiTenancy.Payments;
 using MyCompanyName.AbpZeroTemplate.Storage;
+using MyCompanyName.AbpZeroTemplate.Migrations.Seed;
 
 namespace MyCompanyName.AbpZeroTemplate.EntityFrameworkCore
 {
     public class AbpZeroTemplateDbContext : AbpZeroDbContext<Tenant, Role, User, AbpZeroTemplateDbContext>, IAbpPersistedGrantDbContext
     {
+        public virtual DbSet<Kkkk> Kkkks { get; set; }
+
+        public virtual DbSet<Disease> Diseases { get; set; }
+
+        public virtual DbSet<Person> Persons { get; set; }
+
         public virtual DbSet<AttachmentFile> AttachmentFiles { get; set; }
 
         public virtual DbSet<AttachmentType> AttachmentTypes { get; set; }
@@ -55,12 +63,28 @@ namespace MyCompanyName.AbpZeroTemplate.EntityFrameworkCore
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            SeedHelper.AddSeedOnModelCreate(modelBuilder);
+
+
+
+
 
            
            
            
-           
-            modelBuilder.Entity<AttachmentFile>(a =>
+            modelBuilder.Entity<Kkkk>(k =>
+            {
+                k.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<Disease>(d =>
+            {
+                d.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<Person>(p =>
+            {
+                p.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<AttachmentFile>(a =>
             {
                 a.HasIndex(e => new { e.TenantId });
             });

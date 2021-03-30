@@ -5,8 +5,10 @@ using Abp.Domain.Uow;
 using Abp.EntityFrameworkCore.Uow;
 using Abp.MultiTenancy;
 using Microsoft.EntityFrameworkCore;
+using MyCompanyName.AbpZeroTemplate.Attachments;
 using MyCompanyName.AbpZeroTemplate.EntityFrameworkCore;
 using MyCompanyName.AbpZeroTemplate.Migrations.Seed.Host;
+using MyCompanyName.AbpZeroTemplate.Migrations.Seed.OnCreateModel;
 using MyCompanyName.AbpZeroTemplate.Migrations.Seed.Tenants;
 
 namespace MyCompanyName.AbpZeroTemplate.Migrations.Seed
@@ -44,6 +46,12 @@ namespace MyCompanyName.AbpZeroTemplate.Migrations.Seed
                     uow.Complete();
                 }
             }
+        }
+
+        public static void AddSeedOnModelCreate(ModelBuilder modelBuilder)
+        {
+            new AttachmentTypeSeed(modelBuilder.Entity<AttachmentType>());
+            new AttachmentEntityTypeSeed(modelBuilder.Entity<AttachmentEntityType>());
         }
     }
 }

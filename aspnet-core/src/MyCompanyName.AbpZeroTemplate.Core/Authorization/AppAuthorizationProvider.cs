@@ -30,6 +30,27 @@ namespace MyCompanyName.AbpZeroTemplate.Authorization
 
             var pages = context.GetPermissionOrNull(AppPermissions.Pages) ?? context.CreatePermission(AppPermissions.Pages, L("Pages"));
 
+            var kkkks = pages.CreateChildPermission(AppPermissions.Pages_Kkkks, L("Kkkks"));
+            kkkks.CreateChildPermission(AppPermissions.Pages_Kkkks_Create, L("CreateNewKkkk"));
+            kkkks.CreateChildPermission(AppPermissions.Pages_Kkkks_Edit, L("EditKkkk"));
+            kkkks.CreateChildPermission(AppPermissions.Pages_Kkkks_Delete, L("DeleteKkkk"));
+
+
+
+            var diseases = pages.CreateChildPermission(AppPermissions.Pages_Diseases, L("Diseases"));
+            diseases.CreateChildPermission(AppPermissions.Pages_Diseases_Create, L("CreateNewDisease"));
+            diseases.CreateChildPermission(AppPermissions.Pages_Diseases_Edit, L("EditDisease"));
+            diseases.CreateChildPermission(AppPermissions.Pages_Diseases_Delete, L("DeleteDisease"));
+
+
+
+            var persons = pages.CreateChildPermission(AppPermissions.Pages_Persons, L("Persons"));
+            persons.CreateChildPermission(AppPermissions.Pages_Persons_Create, L("CreateNewPerson"));
+            persons.CreateChildPermission(AppPermissions.Pages_Persons_Edit, L("EditPerson"));
+            persons.CreateChildPermission(AppPermissions.Pages_Persons_Delete, L("DeletePerson"));
+
+
+
             var attachmentFiles = pages.CreateChildPermission(AppPermissions.Pages_AttachmentFiles, L("AttachmentFiles"));
             attachmentFiles.CreateChildPermission(AppPermissions.Pages_AttachmentFiles_Create, L("CreateNewAttachmentFile"));
             attachmentFiles.CreateChildPermission(AppPermissions.Pages_AttachmentFiles_Edit, L("EditAttachmentFile"));
