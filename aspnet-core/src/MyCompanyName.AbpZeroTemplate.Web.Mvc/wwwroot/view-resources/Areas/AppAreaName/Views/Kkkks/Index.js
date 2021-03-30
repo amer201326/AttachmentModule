@@ -1,3 +1,4 @@
+﻿(function () {
     $(function () {
 
         var _$kkkksTable = $('#KkkksTable');
